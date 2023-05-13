@@ -1,0 +1,16 @@
+apiVersion: v2
+name: mtphotos
+version: 1.18.0
+description: MT Photos照片管理系统
+home: https://mtmt.tech/
+icon: https://cdn.mtmt.tech/logo-r.png
+keywords:
+  - media
+maintainers: # (optional)
+  - name: MT Photos
+    email: support@mtmt.tech
+    url: https://mtmt.tech
+dependencies:
+  - name: common
+    repository: file://../../../library/common/2207.0.0
+    version: 2207.0.0
