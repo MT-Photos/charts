@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mtphotos
-version: 1.22.0
+version: 1.22.1
 description: MT Photos照片管理系统
 home: https://mtmt.tech/
 icon: https://cdn.mtmt.tech/logo-r.png
