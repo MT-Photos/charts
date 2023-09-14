@@ -2,9 +2,11 @@ groups:
   - name: "Configuration"
     description: "MT Photos application configuration"
   - name: "Storage"
-    description: "Configure storage for mtphotos"
+    description: "Configure storage for MT Photos"
   - name: "Networking"
-    description: "Networking Configuration for mtphotos"
+    description: "Networking Configuration for MT Photos"
+  - name: "Networking2"
+    description: "Networking Configuration for MT Photos Https"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
@@ -37,6 +39,23 @@ questions:
       type: int
       default: 8063
       required: true
+
+  - variable: web_port
+      label: "用于访问MT Photos Https服务的端口"
+      group: Networking2
+      schema:
+        type: int
+        min: 1
+        max: 65535
+        default: 28163
+        required: false
+  - variable: targetPort
+    label: "Pod内的端口"
+    group: Networking2
+    schema:
+      type: int
+      default: 8163
+      required: false
 
   - variable: dnsConfig
     label: "DNS Configuration"
