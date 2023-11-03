@@ -1,4 +1,0 @@
-image:
-  repository: mtphotos/mt-photos-ai
-  tag: v1.1.0@sha256:958ff8491c49b3f4c193a355f282cb924e251261d9247b00cc58a8fca2d3f02d
-  pullPolicy: IfNotPresent
