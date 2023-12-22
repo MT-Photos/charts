@@ -1,10 +1,10 @@
 groups:
   - name: "Configuration"
     description: "MT Photos application configuration"
-  - name: "Storage"
-    description: "Configure storage for mtphotos"
   - name: "Networking"
     description: "Networking Configuration for mtphotos"
+  - name: "Storage"
+    description: "Configure storage for mtphotos"
   - name: "Advanced DNS Settings"
     description: "Configure DNS settings"
   - name: "Resource Limits"
@@ -70,7 +70,7 @@ questions:
     group: "Configuration"
     schema:
       type: string
-      default: "api_key_123"
+      default: "mt_photos_ai_extra_secret"
 
   - variable: environmentVariables
     label: "环境变量"
