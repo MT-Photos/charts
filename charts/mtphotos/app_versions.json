@@ -388,42 +388,11 @@
                   "type": "dict",
                   "attrs": [
                     {
-                      "variable": "df-models",
+                      "variable": "dfModels",
                       "label": "df models Volume",
                       "schema": {
                         "type": "dict",
                         "attrs": [
-                          {
-                            "variable": "datasetName",
-                            "label": "df models Volume Name",
-                            "schema": {
-                              "type": "string",
-                              "hidden": true,
-                              "$ref": [
-                                "normalize/ixVolume"
-                              ],
-                              "default": "ix-df_models",
-                              "show_if": [
-                                [
-                                  "hostPathEnabled",
-                                  "=",
-                                  false
-                                ]
-                              ],
-                              "editable": false
-                            }
-                          },
-                          {
-                            "variable": "mountPath",
-                            "label": "df models Mount Path",
-                            "description": "Path where the volume will be mounted inside the pod",
-                            "schema": {
-                              "type": "path",
-                              "hidden": true,
-                              "editable": false,
-                              "default": "/models"
-                            }
-                          },
                           {
                             "variable": "hostPathEnabled",
                             "label": "Enable Host Path for df models Volume",
