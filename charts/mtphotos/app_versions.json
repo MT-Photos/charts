@@ -1,13 +1,13 @@
 {
-  "1.29.2": {
+  "1.29.3": {
     "healthy": true,
     "supported": true,
     "healthy_error": null,
-    "location": "/__w/charts/mtphotos/1.29.2",
+    "location": "/__w/charts/mtphotos/1.29.3",
     "last_update": "2024-04-30 17:30:00",
     "required_features": [],
-    "human_version": "22_1.29.2",
-    "version": "1.29.2",
+    "human_version": "23_1.29.3",
+    "version": "1.29.3",
     "chart_metadata": {
       "name": "mt-photos",
       "description": "MT Photos照片管理系统",
@@ -15,7 +15,7 @@
         "title": "MT Photos"
       },
       "type": "application",
-      "version": "1.29.2",
+      "version": "1.29.3",
       "apiVersion": "v2",
       "appVersion": "22",
       "kubeVersion": ">=1.16.0-0",
