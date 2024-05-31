@@ -1,0 +1,4 @@
+image:
+  repository: mtphotos/mt-photos
+  tag: 1.30.0@sha256:99c75c81e78cf7da952228b53e211cbf6204f31b32a20fea774f93f5c5ac48fd
+  pullPolicy: IfNotPresent
