@@ -1,0 +1,391 @@
+groups:
+  - name: "Configuration"
+    description: "MT Photos application configuration"
+  - name: "Storage"
+    description: "Configure storage for MT Photos"
+  - name: "Networking"
+    description: "Networking Configuration for MT Photos"
+  - name: "Networking2"
+    description: "Networking Configuration for MT Photos Https"
+  - name: Ingress
+    description: Configuration Ingress
+  - name: "Advanced DNS Settings"
+    description: "Configure DNS settings"
+  - name: "Resource Reservation"
+    description: "Specify resources to be allocated to workload"
+
+  - name: "Resource Limits"
+    description: "Set CPU/memory limits for Kubernetes Pod"
+
+portals:
+  web_portal:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+    path: "$kubernetes-resource_configmap_portal_path"
+
+questions:
+  - variable: web_port
+    label: "用于访问MT Photos服务的端口"
+    group: Networking
+    schema:
+      type: int
+      min: 1
+      max: 65535
+      default: 28063
+      required: true
+  - variable: targetPort
+    label: "Pod内的端口"
+    group: Networking
+    schema:
+      type: int
+      default: 8063
+      required: true
+  - variable: ingressEnabled
+    group: Ingress
+    label: Enable Ingress
+    description: "config ingress, you must install traefik first"
+    schema:
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: certificate
+          label: Certificate Configuration
+          schema:
+            type: int
+            $ref:
+              - "definitions/certificate" 
+        - variable: host
+          label: HostName
+          schema:
+            type: string
+            default: "test.test.org"
+            required: true
+        - variable: path
+          label: Path
+          schema:
+            type: string
+            required: true
+            default: "/"
+        - variable: pathType
+          label: Path Type
+          schema:
+            type: string
+            required: true
+            default: Prefix
+            
+  - variable: dnsConfig
+    label: "DNS Configuration"
+    group: "Advanced DNS Settings"
+    schema:
+      type: dict
+      attrs:
+        - variable: options
+          label: "DNS Options"
+          schema:
+            type: list
+            items:
+              - variable: optionsEntry
+                label: "Option Entry Configuration"
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: name
+                      label: "Option Name"
+                      schema:
+                        type: string
+                        required: true
+                    - variable: value
+                      label: "Option Value"
+                      schema:
+                        type: string
+                        required: true
+
+  - variable: ownerUID
+    label: "ownerUID - 目录所属用户UID"
+    group: Configuration
+    schema:
+      type: int
+      default: 1000
+      min: 1
+      max: 65535
+
+  - variable: ownerGID
+    label: "ownerGID - 目录所属用户GID"
+    group: Configuration
+    schema:
+      type: int
+      default: 1000
+      min: 1
+      max: 65535
+
+  - variable: TZ
+    label: "时区"
+    group: "Configuration"
+    schema:
+      type: string
+      default: "Asia/Shanghai"
+      $ref:
+        - "definitions/timezone"
+  - variable: aiEnabled
+    group: Configuration
+    label: Enable AI
+    description: "Enable AI"
+    schema:
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: ai_api
+          label: API
+          schema:
+            type: string
+            default: "mt_photos_ai_extra_secret"
+            required: true
+  - variable: dfEnabled
+    group: Configuration
+    label: Enable DF
+    description: "Enable DF(bate)"
+    schema:
+      type: boolean
+      default: false
+      show_subquestions_if: true
+      subquestions:
+        - variable: df_api
+          label: API
+          schema:
+            type: string
+            default: "mt_photos_ai_extra_secret"
+            required: true
+        - variable: detector_backend
+          label: DETECTOR BACKEND
+          schema:
+            type: string
+            default: retinaface
+            enum:
+              - value: opencv
+                description: "opencv"
+              - value: ssd
+                description: "ssd"
+              - value: dlib
+                description: "dlib"
+              - value: mtcnn
+                description: "mtcnn"
+              - value: retinaface
+                description: "retinaface"
+              - value: mediapipe
+                description: "mediapipe"
+              - value: yolov8
+                description: "yolov8"
+              - value: yunet
+                description: "yunet"
+              - value: fastmtcnn
+                description: "fastmtcnn"
+        - variable: recognition_model
+          label: RECOGNITION MODEL
+          schema:
+            type: string
+            default: Facenet512
+            enum:
+              - value: VGG-Face
+                description: "VGG-Face"
+              - value: Facenet
+                description: "Facenet"
+              - value: Facenet512
+                description: "Facenet512"
+              - value: OpenFace
+                description: "OpenFace"
+              - value: DeepFace
+                description: "DeepFace"
+              - value: DeepID
+                description: "DeepID"
+              - value: ArcFace
+                description: "ArcFace"
+              - value: Dlib
+                description: "Dlib"
+              - value: SFace
+                description: "SFace"
+              - value: GhostFaceNet
+                description: "GhostFaceNet"
+        - variable: dfAppVolumeMounts
+          label: "DF Storage"
+          schema:
+            type: dict
+            attrs:
+              - variable: dfModels
+                label: "df models Volume"
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: hostPathEnabled
+                      label: "Enable Host Path for df models Volume"
+                      schema:
+                        type: boolean
+                        default: false
+                        show_subquestions_if: true
+                        subquestions:
+                          - variable: hostPath
+                            label: "Host Path for df models Volume"
+                            schema:
+                              type: hostpath
+                              required: true
+
+  - variable: environmentVariables
+    label: "其他环境变量"
+    group: "Configuration"
+    schema:
+      type: list
+      default: [ ]
+      items:
+        - variable: environmentVariable
+          label: "环境变量"
+          description: "参考：https://mtmt.tech/docs/advanced/env"
+          schema:
+            type: dict
+            attrs:
+              - variable: name
+                label: "Name"
+                schema:
+                  type: string
+              - variable: value
+                label: "Value"
+                schema:
+                  type: string
+  - variable: appVolumeMounts
+    label: "目录映射"
+    group: "Storage"
+    schema:
+      type: dict
+      attrs:
+        - variable: config
+          label: "/config 数据目录"
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: "Configuration Volume Dataset Name"
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+                  show_if: [["hostPathEnabled", "=", false]]
+                  default: "ix-mtphotos_config"
+                  editable: false
+              - variable: mountPath
+                label: "Pod内的路径"
+                schema:
+                  type: path
+                  hidden: false
+                  editable: false
+                  default: "/config"
+              - variable: hostPathEnabled
+                label: "指定目录映射位置"
+                description: "关闭时系统会为其自动创建数据集"
+                schema:
+                  type: boolean
+                  default: true
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: "存储MT Photos数据的目录"
+                      schema:
+                        type: hostpath
+                        required: true
+        - variable: upload
+          label: "/upload App备份目录"
+          schema:
+            type: dict
+            attrs:
+              - variable: datasetName
+                label: "Upload Volume Dataset Name"
+                schema:
+                  type: string
+                  hidden: true
+                  $ref:
+                    - "normalize/ixVolume"
+                  show_if: [["hostPathEnabled", "=", false]]
+                  default: "ix-mtphotos_data"
+                  editable: false
+              - variable: mountPath
+                label: "Pod内的路径"
+                schema:
+                  type: path
+                  hidden: false
+                  editable: false
+                  default: "/upload"
+              - variable: hostPathEnabled
+                label: "指定目录映射位置"
+                description: "关闭时系统会为其自动创建数据集"
+                schema:
+                  type: boolean
+                  default: true
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: hostPath
+                      label: "存放App备份的照片目录"
+                      schema:
+                        type: hostpath
+                        required: true
+
+  - variable: extraAppVolumeMounts
+    label: "添加其他目录映射"
+    group: "Storage"
+    schema:
+      type: list
+      items:
+        - variable: extraAppVolume
+          label: "目录映射"
+          schema:
+            type: dict
+            attrs:
+              - variable: mountPath
+                label: "Pod内的路径"
+                description: "在pod内挂载的路径"
+                schema:
+                  type: path
+                  required: true
+              - variable: hostPath
+                label: "宿主机路径"
+                description: "存储着已有照片的目录"
+                schema:
+                  type: hostpath
+                  required: true
+  # Specify GPU configuration
+  - variable: gpuConfiguration
+    label: "GPU Configuration"
+    group: "Resource Reservation"
+    schema:
+      type: dict
+      $ref:
+        - "definitions/gpuConfiguration"
+      attrs: []
+
+  - variable: enableResourceLimits
+    label: "Enable Pod resource limits"
+    group: "Resource Limits"
+    schema:
+      type: boolean
+      default: false
+  - variable: cpuLimit
+    label: "CPU Limresource limitsit"
+    description: "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100."
+    group: "Resource Limits"
+    schema:
+      type: string
+      show_if: [["enableResourceLimits", "=", true]]
+      valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
+      default: "4000m"
+  - variable: memLimit
+    label: "Memory Limit"
+    group: "Resource Limits"
+    description: "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi"
+    schema:
+      type: string
+      show_if: [["enableResourceLimits", "=", true]]
+      valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+      default: "8Gi"
