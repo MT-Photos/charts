@@ -70,6 +70,40 @@
                 "https://mtmt.tech"
             ],
             "icon_url": "https://cdn.mtmt.tech/logo-ai-r.png"
+        },
+        "mtphotos-insightface": {
+            "app_readme": "<h1>MT Photos Insightface</h1>",
+            "categories": [
+                "media"
+            ],
+            "description": "MT Photos Insightface 人脸识别",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://mtmt.tech",
+            "location": "/__w/charts/charts/charts/mtphotos-insightface",
+            "latest_version": "1.0.0",
+            "latest_app_version": "1",
+            "latest_human_version": "1.0.0",
+            "last_update": "2024-10-10 09:00:00",
+            "name": "mtphotos-insightface",
+            "recommended": false,
+            "title": "MT Photos insightface",
+            "maintainers": [
+                {
+                    "name": "MT Photos",
+                    "url": "https://mtmt.tech",
+                    "email": "support@mtmt.tech"
+                }
+            ],
+            "tags": [
+                "photos",
+                "image"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://mtmt.tech"
+            ],
+            "icon_url": "https://cdn.mtmt.tech/logo-ai-r.png"
         }
     }
 }
