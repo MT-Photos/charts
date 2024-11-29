@@ -95,7 +95,7 @@
           "group": "Networking",
           "schema": {
             "type": "int",
-            "default": 8000,
+            "default": 8060,
             "min": 80,
             "max": 65535,
             "required": true

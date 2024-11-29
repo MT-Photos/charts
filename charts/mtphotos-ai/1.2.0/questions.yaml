@@ -28,14 +28,14 @@ questions:
       type: int
       min: 1
       max: 65535
-      default: 28000
+      default: 28060
       required: true
   - variable: targetPort
     label: "Pod内的端口"
     group: Networking
     schema:
       type: int
-      default: 8000
+      default: 8060
       required: true
 
   - variable: dnsConfig
