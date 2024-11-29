@@ -1,13 +1,13 @@
 {
-  "1.1.0": {
+  "1.2.0": {
     "healthy": true,
     "supported": true,
     "healthy_error": null,
-    "location": "/__w/charts/mtphotos-ai/1.1.0",
-    "last_update": "2023-12-22 09:00:00",
+    "location": "/__w/charts/mtphotos-ai/1.2.0",
+    "last_update": "2024-11-22 09:00:00",
     "required_features": [],
-    "human_version": "10_1.1.0",
-    "version": "1.1.0",
+    "human_version": "11_1.2.0",
+    "version": "1.2.0",
     "chart_metadata": {
       "name": "mt-photos-ai",
       "description": "MT Photos 智能识别功能",
@@ -15,9 +15,9 @@
         "title": "MT Photos AI"
       },
       "type": "application",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "apiVersion": "v2",
-      "appVersion": "10",
+      "appVersion": "11",
       "kubeVersion": ">=1.16.0-0",
       "maintainers": [
         {

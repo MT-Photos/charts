@@ -1,0 +1,4 @@
+image:
+  repository: mtphotos/mt-photos-ai
+  tag: 1.2.0
+  pullPolicy: IfNotPresent
